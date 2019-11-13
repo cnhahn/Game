@@ -1,34 +1,29 @@
-﻿// Creates a simple wizard that lets you create a Light GameObject
-// or if the user clicks in "Apply", it will set the color of the currently
-// object selected to red
-
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 public class ObjectSnapper : ScriptableWizard
 {
-    public float snappingRange = 1;
-    public bool roundUpOnly = false;
+    public int snappingRange = 1;
+    public bool snapPosition = false;
+    public bool snapRotation = false;
+    public int rotationAngle = 90;
 
     [MenuItem("Tools/Object Snapper")]
     static void CreateWizard()
     {
         ScriptableWizard.DisplayWizard<ObjectSnapper>("Snap Objects to Units", "Snap All", "Snap Selected");
-        //If you don't want to use the secondary button simply leave it out:
-        //ScriptableWizard.DisplayWizard<WizardCreateLight>("Create Light", "Create");
     }
 
     void OnWizardCreate()
     {
-        //GameObject.Find();
+        Debug.LogWarning("Not yet implemented, sorry.");
     }
 
     void OnWizardUpdate()
     {
-        helpString = "Will snap objects to full whole number of meters";
+        helpString = "Will snap objects to whole meter. Can also snap angles to make sure those are all set. \n\nWarning: Can flip objects randomly. (rare)";
     }
 
-    // When the user presses the "Apply" button OnWizardOtherButton is called.
     void OnWizardOtherButton()
     {
         Transform[] transforms = Selection.GetTransforms(SelectionMode.Editable);
@@ -38,6 +33,15 @@ public class ObjectSnapper : ScriptableWizard
             foreach(Transform t in transforms)
             {
                 t.position = new Vector3(Mathf.Round(t.position.x), Mathf.Round(t.position.y), Mathf.Round(t.position.z));
+                
+                if(snapRotation)
+                {
+                    Vector3 rotAngle = t.rotation.eulerAngles;
+
+                    t.rotation = Quaternion.Euler(Mathf.Round(rotAngle.x / rotationAngle) * rotationAngle,
+                        Mathf.Round(rotAngle.y / rotationAngle) * rotationAngle,
+                        Mathf.Round(rotAngle.z / rotationAngle) * rotationAngle);
+                }
             }
         }
     }
