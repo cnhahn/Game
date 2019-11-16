@@ -42,5 +42,10 @@ public class Monster : MonoBehaviour
 
             _agent.destination = _player.transform.position;
         }
+
+        if(Vector3.Distance(this.transform.position, _player.transform.position) < 1)
+        {
+            _player.GetComponent<Oxygen>().KillPlayer();
+        }
     }
 }

@@ -17,8 +17,15 @@ public class Oxygen : MonoBehaviour
     private bool _isded;
     [SerializeField]
     private RectTransform _uiPanel;
+    [SerializeField]
+    private GameObject _deathUI;
 
     private bool _isRecharging = false;
+
+    private void Start()
+    {
+        _deathUI.SetActive(false);
+    }
 
     private void Update()
     {
@@ -50,6 +57,8 @@ public class Oxygen : MonoBehaviour
     private void Death()
     {
         _isded = true;
+        GetComponent<MoveController>().SetMovementEnabled(false);
+        _deathUI.SetActive(true);
     }
 
     private void UpdateUI()

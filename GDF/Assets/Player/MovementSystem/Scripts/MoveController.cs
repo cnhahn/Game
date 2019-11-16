@@ -24,6 +24,8 @@ public class MoveController : MonoBehaviour
     private bool airControlSeparate;
     [SerializeField]
     private float crouchHeight;
+    [SerializeField]
+    private bool _canMove = true;
 
     private StateController _sc;
     private Rigidbody _rb;
@@ -35,6 +37,7 @@ public class MoveController : MonoBehaviour
     private bool _isMoving = false;
     private float _moveSpeed;
     private float _standingHeight;
+    
 
     //====
     //Unity Calls
@@ -51,11 +54,18 @@ public class MoveController : MonoBehaviour
 
     private void Update()
     {
-        ProcessMovement();
-        ProcessJump();
-        ProcessGround();
-        ProcessSteps();
-        ProcessCrouching();
+        if (_canMove)
+        {
+            ProcessMovement();
+            ProcessJump();
+            ProcessGround();
+            ProcessSteps();
+            ProcessCrouching();
+        }
+        else
+        {
+            ApplyMovement(0, 0);
+        }
     }
 
     //====
@@ -386,5 +396,17 @@ public class MoveController : MonoBehaviour
         //play the sound at our feet
     }
 
+    #endregion
+
+
+    //=============
+    //Public Calls
+    //=============
+    #region PublicCalls
+
+    public void SetMovementEnabled(bool canMove)
+    {
+        _canMove = canMove;
+    }
     #endregion
 }
