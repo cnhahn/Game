@@ -9,6 +9,7 @@ public class LightStation : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             other.GetComponent<LightLevel>().isSafe = true;
+            other.GetComponent<Oxygen>().ToggleRecharging(true);
         }
     }
 
@@ -17,6 +18,7 @@ public class LightStation : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             other.GetComponent<LightLevel>().isSafe = false;
+            other.GetComponent<Oxygen>().ToggleRecharging(false);
         }
     }
 }
