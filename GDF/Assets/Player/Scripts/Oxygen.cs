@@ -23,6 +23,7 @@ public class Oxygen : MonoBehaviour
     [SerializeField]
     private PostProcessProfile profile;
 
+    private List<float> inputIntensities = new List<float>();
     private bool _isRecharging = false;
 
     private void Start()
@@ -57,6 +58,11 @@ public class Oxygen : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        ApplyIntensities();
+    }
+
     private void Death()
     {
         _isded = true;
@@ -68,6 +74,26 @@ public class Oxygen : MonoBehaviour
     private void UpdateUI()
     {
         _uiPanel.localScale = new Vector3(1, _oxygenLevel / 100, 1);
+    }
+
+    private void ApplyIntensities()
+    {
+        float total = 0;
+
+        foreach(float f in inputIntensities)
+        {
+            total += f;
+        }
+
+        float applyPercentages = total / inputIntensities.Count;
+
+        if(applyPercentages == 0)
+        {
+            applyPercentages = 0.1f;
+        }
+
+        profile.GetSetting<Grain>().intensity.value = applyPercentages;
+        profile.GetSetting<Vignette>().intensity.value = applyPercentages;
     }
 
     public void ToggleRecharging(bool chargeState)
@@ -82,7 +108,6 @@ public class Oxygen : MonoBehaviour
 
     public void DyingEffects(float intensity)
     {
-        profile.GetSetting<Grain>().intensity.value = intensity;
-        profile.GetSetting<Vignette>().intensity.value = intensity;
+        inputIntensities.Add(intensity);
     }
 }

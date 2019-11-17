@@ -71,7 +71,6 @@ public class SimpleInventory : MonoBehaviour
             RectTransform panelrt = _panel.GetComponent<RectTransform>();
 
             //Clear all the childre, not the right way, but the quick and dirty way. 
-            Debug.Log(panelrt.childCount);
             if (panelrt.childCount > 0)
             {
                 int items = panelrt.childCount;

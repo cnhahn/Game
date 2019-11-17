@@ -66420,6 +66420,7 @@ MonoBehaviour:
   _isded: 0
   _uiPanel: {fileID: 962642803}
   _deathUI: {fileID: 1532032844}
+  profile: {fileID: 11400000, guid: 680922c45b9bfe14085ea8a49e7d23dd, type: 2}
 --- !u!199 &2102035381
 ParticleSystemRenderer:
   serializedVersion: 6
