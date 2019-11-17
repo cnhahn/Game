@@ -58,7 +58,7 @@ public class Monster : MonoBehaviour
 
             
 
-            _player.GetComponent<Oxygen>().DyingEffects(val / 100);
+            _player.GetComponent<Oxygen>().DyingEffects((val / 100) / 1.2f);
         }
     }
 }
