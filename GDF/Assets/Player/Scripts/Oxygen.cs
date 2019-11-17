@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Oxygen : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class Oxygen : MonoBehaviour
     private RectTransform _uiPanel;
     [SerializeField]
     private GameObject _deathUI;
+    [SerializeField]
+    private PostProcessProfile profile;
 
     private bool _isRecharging = false;
 
@@ -59,6 +62,7 @@ public class Oxygen : MonoBehaviour
         _isded = true;
         GetComponent<MoveController>().SetMovementEnabled(false);
         _deathUI.SetActive(true);
+        profile.GetSetting<Grain>().intensity.value = 1;
     }
 
     private void UpdateUI()
@@ -74,5 +78,11 @@ public class Oxygen : MonoBehaviour
     public void KillPlayer()
     {
         Death();
+    }
+
+    public void DyingEffects(float intensity)
+    {
+        profile.GetSetting<Grain>().intensity.value = intensity;
+        profile.GetSetting<Vignette>().intensity.value = intensity;
     }
 }
