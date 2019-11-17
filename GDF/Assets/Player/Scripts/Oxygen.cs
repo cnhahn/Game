@@ -79,21 +79,28 @@ public class Oxygen : MonoBehaviour
     private void ApplyIntensities()
     {
         float total = 0;
+        float applyPercentages = 0.1f;
 
-        foreach(float f in inputIntensities)
+        if (inputIntensities.Count > 0)
         {
-            total += f;
-        }
 
-        float applyPercentages = total / inputIntensities.Count;
+            foreach (float f in inputIntensities)
+            {
+                total += f;
+            }
 
-        if(applyPercentages == 0)
-        {
-            applyPercentages = 0.1f;
+            applyPercentages = total / inputIntensities.Count;
+
+            if (applyPercentages == 0)
+            {
+                applyPercentages = 0.1f;
+            }
         }
 
         profile.GetSetting<Grain>().intensity.value = applyPercentages;
         profile.GetSetting<Vignette>().intensity.value = applyPercentages;
+
+        inputIntensities = new List<float>();
     }
 
     public void ToggleRecharging(bool chargeState)

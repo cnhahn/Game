@@ -48,15 +48,17 @@ public class Monster : MonoBehaviour
             _player.GetComponent<Oxygen>().KillPlayer();
         }
 
-        if (Vector3.Distance(this.transform.position, _player.transform.position) < 5)
+        if (Vector3.Distance(this.transform.position, _player.transform.position) < 10)
         {
             float input = Vector3.Distance(this.transform.position, _player.transform.position);
-            float min = 1;
-            float max = 5;
+            float min = 0;
+            float max = 10;
 
             float val = 100 - (((input - min) * 100) / (max - min));
 
-            _player.GetComponent<Oxygen>().DyingEffects(val / 2);
+            
+
+            _player.GetComponent<Oxygen>().DyingEffects(val / 100);
         }
     }
 }
