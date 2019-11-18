@@ -1,0 +1,7 @@
+newmtl RoundRocks
+map_Pm desert_cliff_eroded_Metallic.tga
+bump desert_cliff_eroded_Normal.tga
+map_Kd desert_cliff_eroded_Base_Color.tga
+Kd 0.5 0.5 0.5
+d 1
+
