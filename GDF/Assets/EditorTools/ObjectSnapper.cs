@@ -8,7 +8,7 @@ public class ObjectSnapper : ScriptableWizard
     public bool snapRotation = false;
     public int rotationAngle = 90;
 
-    [MenuItem("Tools/Object Snapper")]
+    [MenuItem("Tools/TylerCode/Object Snapper")]
     static void CreateWizard()
     {
         ScriptableWizard.DisplayWizard<ObjectSnapper>("Snap Objects to Units", "Snap All", "Snap Selected");
